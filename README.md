@@ -1,156 +1,138 @@
 ﻿## HOMEPAGE
 
-GameFrameX 的Web 请求组件
+GameFrameX 的 Web ProtoBuff 请求组件
 
-**Web 请求 组件 (Web Request)** - 提供使用短连接的功能，可以用 Get 或者 Post 方法向服务器发送请求并获取响应数据，可指定允许几个 Web 请求器进行同时请求。
+**Web ProtoBuff 组件 (Web ProtoBuff Component)** - 提供基于 Protocol Buffer 的 HTTP 网络请求功能，支持异步发送和接收 ProtoBuff 消息。
 
-# 使用文档(文档编写于GPT4)
+# 使用文档
 
-# WebComponent 说明文档
-
-`WebComponent` 类是一个游戏框架组件，用作处理网络请求的模块。它提供了一系列方法来发送 GET 和 POST 请求，并获取返回的字符串或字节数组数据。以下是该类的详细说明和使用方法。
+`WebProtoBuffComponent` 类是一个游戏框架组件，专门用于处理基于 Protocol Buffer 的网络请求。它提供了一系列方法来发送 POST 请求，并自动处理 ProtoBuf 消息的序列化与反序列化。
 
 ## 功能概述
 
-- 初始化网络管理器
-- 发送 GET 请求并获取返回的字符串或字节数组
-- 发送 POST 请求并获取返回的字符串或字节数组
+- **ProtoBuf 支持**: 原生支持 Protocol Buffer 消息格式。
+- **异步操作**: 基于 `Task<T>` 的异步 API，方便使用 `async/await`。
+- **超时控制**: 支持自定义请求超时时间。
+- **跨平台**: 兼容 Unity WebGL 及其他原生平台。
+
+## 环境要求
+
+使用本组件需要在 Unity 的 **Player Settings** -> **Scripting Define Symbols** 中添加以下宏定义：
+
+`ENABLE_GAME_FRAME_X_WEB_PROTOBUF_NETWORK`
 
 ## 方法说明
 
 ### Awake
 
-初始化游戏框架组件。创建 `WebManager` 实例并获取网络管理器模块。
+初始化游戏框架组件。获取 `IWebProtoBuffManager` 模块并配置超时时间。
 
 ```csharp
-protected override void Awake() { /* 方法体省略 */ }
+protected override void Awake() { /* ... */ }
 ```
 
-### GetToString（重载1）
+### Post<T>
 
-发送 GET 请求并以字符串形式获取响应。
+发送 ProtoBuf 消息并等待响应。
 
 ```csharp
-public Task<string> GetToString(string url) { /* 方法体省略 */ }
+public Task<T> Post<T>(string url, GameFrameX.Network.Runtime.MessageObject message) 
+    where T : GameFrameX.Network.Runtime.MessageObject, GameFrameX.Network.Runtime.IResponseMessage
 ```
 
-### GetToString（重载2）
+- **参数**:
+    - `url`: 目标服务器的 URL 地址。
+    - `message`: 要发送的消息对象（必须继承自 `MessageObject`）。
+- **返回值**:
+    - 返回一个 `Task<T>`，任务完成后包含服务器响应的消息对象。
+- **类型参数**:
+    - `T`: 响应消息的类型（必须继承自 `MessageObject` 并实现 `IResponseMessage`）。
 
-发送带参数的 GET 请求并以字符串形式获取响应。
+### Timeout
 
-```csharp
-public Task<string> GetToString(string url, Dictionary<string, string> queryString) { /* 方法体省略 */ }
-```
-
-### GetToString（重载3）
-
-发送带参数和请求头的 GET 请求并以字符串形式获取响应。
-
-```csharp
-public Task<string> GetToString(string url, Dictionary<string, string> queryString, Dictionary<string, string> header) { /* 方法体省略 */ }
-```
-
-### GetToBytes（重载1）
-
-发送 GET 请求并以字节数组形式获取响应。
+获取或设置请求超时时间（单位：秒）。
 
 ```csharp
-public Task<byte[]> GetToBytes(string url) { /* 方法体省略 */ }
-```
-
-### GetToBytes（重载2）
-
-发送带参数的 GET 请求并以字节数组形式获取响应。
-
-```csharp
-public Task<byte[]> GetToBytes(string url, Dictionary<string, string> queryString) { /* 方法体省略 */ }
-```
-
-### GetToBytes（重载3）
-
-发送带参数和请求头的 GET 请求并以字节数组形式获取响应。
-
-```csharp
-public Task<byte[]> GetToBytes(string url, Dictionary<string, string> queryString, Dictionary<string, string> header) { /* 方法体省略 */ }
-```
-
-### PostToString（重载1）
-
-发送 POST 请求并以字符串形式获取响应。
-
-```csharp
-public Task<string> PostToString(string url, Dictionary<string, string> from = null) { /* 方法体省略 */ }
-```
-
-### PostToString（重载2）
-
-发送带表单和 URL 请求参数的 POST 请求并以字符串形式获取响应。
-
-```csharp
-public Task<string> PostToString(string url, Dictionary<string, string> from, Dictionary<string, string> queryString) { /* 方法体省略 */ }
-```
-
-### PostToString（重载3）
-
-发送带表单、URL 请求参数和请求头的 POST 请求并以字符串形式获取响应。
-
-```csharp
-public Task<string> PostToString(string url, Dictionary<string, string> from, Dictionary<string, string> queryString, Dictionary<string, string> header) { /* 方法体省略 */ }
-```
-
-### PostToBytes（重载1）
-
-发送 POST 请求并以字节数组形式获取响应。
-
-```csharp
-public Task<byte[]> PostToBytes(string url, Dictionary<string, string> from) { /* 方法体省略 */ }
-```
-
-### PostToBytes（重载2）
-
-发送带表单和 URL 请求参数的 POST 请求并以字节数组形式获取响应。
-
-```csharp
-public Task<byte[]> PostToBytes(string url, Dictionary<string, string> from, Dictionary<string, string> queryString) { /* 方法体省略 */ }
-```
-
-### PostToBytes（重载3）
-
-发送带表单、URL 请求参数和请求头的 POST 请求并以字节数组形式获取响应。
-
-```csharp
-public Task<byte[]> PostToBytes(string url, Dictionary<string, string> from, Dictionary<string, string> queryString, Dictionary<string, string> header) { /* 方法体省略 */ }
+public float Timeout { get; set; }
 ```
 
 ## 使用示例
 
-1. 调用 `GetToString` 方法获取不带参数的 GET 请求响应字符串：
+### 1. 定义消息
+
+首先定义请求和响应的 ProtoBuf 消息类。
 
 ```csharp
-Task<string> response = webComponent.GetToString("http://example.com/api/values");
-```
+using ProtoBuf;
+using GameFrameX.Network.Runtime;
 
-2. 使用 `PostToBytes` 方法发送带表单参数的 POST 请求，并以字节数组接收响应：
-
-```csharp
-Dictionary<string, string> formData = new Dictionary<string, string>
+[ProtoContract]
+public class LoginRequest : MessageObject
 {
-    { "param1", "value1" },
-    { "param2", "value2" }
-};
-Task<byte[]> responseBytes = webComponent.PostToBytes("http://example.com/api/upload", formData);
+    [ProtoMember(1)]
+    public string Username { get; set; }
+    
+    [ProtoMember(2)]
+    public string Password { get; set; }
+}
+
+[ProtoContract]
+public class LoginResponse : MessageObject, IResponseMessage
+{
+    [ProtoMember(1)]
+    public bool Success { get; set; }
+    
+    [ProtoMember(2)]
+    public string Token { get; set; }
+}
 ```
 
-## 注意事项
+### 2. 发送请求
 
-确保在网络请求期间合适地处理任务，例如使用 `await` 异步等待结果。
+在组件中使用 `WebProtoBuffComponent` 发送请求。
 
-# 使用方式(任选其一)
+```csharp
+using UnityEngine;
+using GameFrameX.Web.ProtoBuff.Runtime;
+
+public class LoginController : MonoBehaviour
+{
+    public WebProtoBuffComponent WebComponent;
+
+    private async void Start()
+    {
+        var request = new LoginRequest 
+        { 
+            Username = "user", 
+            Password = "password" 
+        };
+        
+        string url = "http://api.example.com/login";
+
+        try
+        {
+            // 发送请求并等待结果
+            LoginResponse response = await WebComponent.Post<LoginResponse>(url, request);
+            
+            if (response != null)
+            {
+                Debug.Log($"Login Result: {response.Success}, Token: {response.Token}");
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Request Failed: {e.Message}");
+        }
+    }
+}
+```
+
+## 安装方式(任选其一)
 
 1. 直接在 `manifest.json` 的文件中的 `dependencies` 节点下添加以下内容
    ```json
-      {"com.gameframex.unity.web": "https://github.com/AlianBlank/com.gameframex.unity.web.git"}
+      {"com.gameframex.unity.web.protobuff": "https://github.com/AlianBlank/com.gameframex.unity.web.protobuff.git"}
     ```
-2. 在Unity 的`Packages Manager` 中使用`Git URL` 的方式添加库,地址为：https://github.com/AlianBlank/com.gameframex.unity.web.git
+2. 在 Unity 的 `Packages Manager` 中使用 `Git URL` 的方式添加库,地址为：`https://github.com/AlianBlank/com.gameframex.unity.web.protobuff.git`
 
-3. 直接下载仓库放置到Unity 项目的`Packages` 目录下。会自动加载识别
+3. 直接下载仓库放置到 Unity 项目的 `Packages` 目录下。会自动加载识别
