@@ -1,4 +1,3 @@
-using GameFrameX.Web.Runtime;
 using UnityEngine;
 using UnityEngine.Scripting;
 
@@ -13,8 +12,6 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
             _ = typeof(WebProtoBuffComponent);
             _ = typeof(IWebProtoBuffManager);
             _ = typeof(WebProtoBuffManager);
-            _ = typeof(WebStringResult);
-            _ = typeof(WebBufferResult);
         }
     }
 }
