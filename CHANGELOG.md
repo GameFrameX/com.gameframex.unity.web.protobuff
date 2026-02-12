@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.0.0...1.1.0) (2026-02-12)
+
+
+### Features
+
+* **Web:** 添加网络消息调试日志 ([78680a8](https://github.com/gameframex/com.gameframex.unity.web.protobuff/commit/78680a8975b724602e3c0fa503320b08bad84005))
+
 # 1.0.0 (2025-12-23)
 
 
