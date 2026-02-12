@@ -180,6 +180,7 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
         /// </remarks>
         public async Task<T> Post<T>(string url, MessageObject message) where T : MessageObject, IResponseMessage
         {
+            DebugSendLog(message);
             var webBufferResult = await PostInner(url, message);
             if (webBufferResult.IsNotNull())
             {
@@ -193,7 +194,9 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
                         return default;
                     }
 
-                    return SerializerHelper.Deserialize<T>(messageObjectHttp.Body);
+                    var messageObject = SerializerHelper.Deserialize<T>(messageObjectHttp.Body);
+                    DebugReceiveLog(messageObject);
+                    return messageObject;
                 }
             }
 
@@ -222,6 +225,23 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
             var webData = new WebProtoBufData(url, sendData, uniTaskCompletionSource, userData);
             m_WaitingProtoBufQueue.Enqueue(webData);
             return uniTaskCompletionSource.Task;
+        }
+
+        private void DebugReceiveLog(MessageObject messageObject)
+        {
+#if ENABLE_GAMEFRAMEX_WEB_RECEIVE_LOG
+            var messageId = ProtoMessageIdHandler.GetReqMessageIdByType(messageObject.GetType());
+            Log.Debug($"接收消息 ID:[{messageId},{messageObject.UniqueId},{messageObject.GetType().Name}] 消息内容:{Utility.Json.ToJson(messageObject)}");
+        #endif
+
+        }
+
+        private void DebugSendLog(MessageObject messageObject)
+        {
+#if ENABLE_GAMEFRAMEX_WEB_SEND_LOG
+            var messageId = ProtoMessageIdHandler.GetReqMessageIdByType(messageObject.GetType());
+            Log.Debug($"发送消息 ID:[{messageId},{messageObject.UniqueId},{messageObject.GetType().Name}] 消息内容:{Utility.Json.ToJson(messageObject)}");
+        #endif
         }
     }
 }
