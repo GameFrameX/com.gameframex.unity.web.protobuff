@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.1.0...1.1.1) (2026-03-27)
+
+
+### Bug Fixes
+
+* **WebProtoBuff:** 移除条件编译并统一使用完全限定名 ([244c062](https://github.com/gameframex/com.gameframex.unity.web.protobuff/commit/244c0625b00b4c965d43a9ddd9413f01d223bf96))
+
 # [1.1.0](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.0.0...1.1.0) (2026-02-12)
 
 
