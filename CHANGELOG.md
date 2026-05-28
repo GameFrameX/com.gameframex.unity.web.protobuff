@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.1.1...1.1.2) (2026-05-28)
+
+
+### Bug Fixes
+
+* **ci:** 统一 .github 工作流配置 ([0ef733b](https://github.com/gameframex/com.gameframex.unity.web.protobuff/commit/0ef733bdfc74e1473394c3ce0a3ffd86750a7a1c))
+
 ## [1.1.1](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.1.0...1.1.1) (2026-03-27)
 
 

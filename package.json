@@ -3,7 +3,7 @@
   "displayName": "Game Frame X Web ProtoBuff",
   "category": "GameFrameX",
   "description": "GameFrameX Web ProtoBuf — Unity Protobuf HTTP POST package. Extends the Web layer with binary message support, serializing MessageObject instances and deserializing typed IResponseMessage responses via conditional compilation. Docs: https://gameframex.doc.alianblank.com\n\nGameFrameX Web ProtoBuf — Unity Protobuf HTTP POST 功能包。扩展 Web 层以支持二进制消息，序列化 MessageObject 实例并通过条件编译反序列化类型化的 IResponseMessage 响应。文档：https://gameframex.doc.alianblank.com",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "unity": "2019.4",
   "keywords": [
     "GameFrameX",
