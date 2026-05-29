@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.1.2...1.1.3) (2026-05-29)
+
+
+### Bug Fixes
+
+* **web:** URL 查询参数使用 Uri.EscapeDataString 编码 ([6841f55](https://github.com/gameframex/com.gameframex.unity.web.protobuff/commit/6841f55d43e219788e5559a03b174231b8d90b97))
+
 ## [1.1.2](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.1.1...1.1.2) (2026-05-28)
 
 
