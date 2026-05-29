@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -62,20 +62,16 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
             while (m_WaitingProtoBufQueue.Count > 0)
             {
                 var webData = m_WaitingProtoBufQueue.Dequeue();
-                webData.Dispose();
+                ReferencePool.Release(webData);
             }
 
             m_WaitingProtoBufQueue.Clear();
-            while (m_SendingProtoBufList.Count > 0)
+            for (int i = 0; i < m_SendingProtoBufList.Count; i++)
             {
-                var webData = m_SendingProtoBufList[0];
-                m_SendingProtoBufList.RemoveAt(0);
-                webData.Dispose();
+                ReferencePool.Release(m_SendingProtoBufList[i]);
             }
 
             m_SendingProtoBufList.Clear();
-
-            m_MemoryStream.Dispose();
         }
 
         /// <summary>
@@ -96,23 +92,29 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
             }
 
             unityWebRequest.timeout = (int)RequestTimeout.TotalSeconds;
-            {
-                unityWebRequest.SetRequestHeader("Content-Type", ProtoBufContentType);
-                byte[] postData = webData.SendData;
-                unityWebRequest.uploadHandler = new UnityEngine.Networking.UploadHandlerRaw(postData);
-            }
+            unityWebRequest.SetRequestHeader("Content-Type", ProtoBufContentType);
+            byte[] postData = webData.SendData;
+            unityWebRequest.uploadHandler = new UnityEngine.Networking.UploadHandlerRaw(postData);
 
             var asyncOperation = unityWebRequest.SendWebRequest();
             asyncOperation.completed += (asyncOperation2) =>
             {
-                m_SendingProtoBufList.Remove(webData);
-                if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError || unityWebRequest.error != null)
+                try
                 {
-                    webData.Task.TrySetException(new Exception(unityWebRequest.error));
-                    return;
-                }
+                    m_SendingProtoBufList.Remove(webData);
+                    if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError || unityWebRequest.error != null)
+                    {
+                        webData.Task.TrySetException(new Exception(unityWebRequest.error));
+                        return;
+                    }
 
-                webData.Task.SetResult(new WebBufferResult(webData.UserData, unityWebRequest.downloadHandler.data));
+                    webData.Task.SetResult(new WebBufferResult(webData.UserData, unityWebRequest.downloadHandler.data));
+                }
+                finally
+                {
+                    unityWebRequest.Dispose();
+                    ReferencePool.Release(webData);
+                }
             };
 #else
             try
@@ -132,10 +134,11 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
                 {
                     using (Stream responseStream = response.GetResponseStream())
                     {
-                        m_MemoryStream.SetLength(response.ContentLength);
-                        m_MemoryStream.Position = 0;
-                        await responseStream.CopyToAsync(m_MemoryStream);
-                        webData.Task.SetResult(new WebBufferResult(webData.UserData, m_MemoryStream.ToArray())); // 将流的内容复制到内存流中并转换为byte数组 
+                        using (var ms = new MemoryStream())
+                        {
+                            await responseStream.CopyToAsync(ms);
+                            webData.Task.SetResult(new WebBufferResult(webData.UserData, ms.ToArray()));
+                        }
                     }
                 }
             }
@@ -161,6 +164,7 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
             finally
             {
                 m_SendingProtoBufList.Remove(webData);
+                ReferencePool.Release(webData);
             }
 #endif
         }
@@ -219,7 +223,7 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
                 Body = SerializerHelper.Serialize(message),
             };
             var sendData = SerializerHelper.Serialize(messageHttpObject);
-            var webData = new WebProtoBufData(url, sendData, uniTaskCompletionSource, userData);
+            var webData = WebProtoBufData.Create(url, sendData, uniTaskCompletionSource, userData);
             m_WaitingProtoBufQueue.Enqueue(webData);
             return uniTaskCompletionSource.Task;
         }

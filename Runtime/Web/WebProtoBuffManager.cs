@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using GameFrameX.Runtime;
 #if UNITY_WEBGL
@@ -18,9 +17,6 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
         // 用于构建URL的StringBuilder
         private readonly StringBuilder m_StringBuilder = new StringBuilder(256);
 
-        // 用于存储请求和响应数据的内存流
-        private readonly MemoryStream m_MemoryStream;
-
         // 超时时间(秒)
         private float m_Timeout = 5f;
 
@@ -31,7 +27,6 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
         public WebProtoBuffManager()
         {
             MaxConnectionPerServer = 8;
-            m_MemoryStream = new MemoryStream();
             Timeout = 5f;
         }
 
@@ -75,7 +70,6 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
         protected override void Shutdown()
         {
             ShutdownProtoBuf();
-            m_MemoryStream.Dispose();
         }
 
         /// <summary>
