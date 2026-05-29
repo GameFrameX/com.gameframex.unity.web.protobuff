@@ -91,7 +91,7 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
 
                 foreach (var kv in queryString)
                 {
-                    m_StringBuilder.AppendFormat("{0}={1}&", kv.Key, kv.Value);
+                    m_StringBuilder.AppendFormat("{0}={1}&", Uri.EscapeDataString(kv.Key), Uri.EscapeDataString(kv.Value));
                 }
 
                 url = m_StringBuilder.ToString(0, m_StringBuilder.Length - 1);
