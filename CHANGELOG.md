@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.1.3...1.1.4) (2026-06-07)
+
+
+### Bug Fixes
+
+* 补全包规范文件（LICENSE/CHANGELOG/URL 字段/unity 字段） ([5d924b5](https://github.com/gameframex/com.gameframex.unity.web.protobuff/commit/5d924b5a19ac0a31e61ab7f0ca670e70b197edf2))
+
 ## [1.1.3](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.1.2...1.1.3) (2026-05-29)
 
 
