@@ -25,11 +25,34 @@
 
 GameFrameX 的 Web ProtoBuff 請求組件 - 提供基於 Protocol Buffer 的 HTTP 網絡請求功能，支持異步發送和接收 ProtoBuff 消息。
 
-## 安裝方式（任選其一）
+## 安裝
 
-1. 直接在 `manifest.json` 文件中的 `dependencies` 節點下添加
-   ```json
-   {"com.gameframex.unity.web.protobuff": "https://github.com/gameframex/com.gameframex.unity.web.protobuff.git"}
-   ```
-2. 在 Unity 的 `Packages Manager` 中使用 `Git URL` 添加
-3. 直接下載倉庫放置到 Unity 項目的 `Packages` 目錄下
+### 安裝
+
+編輯 Unity 專案的 `Packages/manifest.json`，添加 `scopedRegistries` 部分：
+
+```json
+{
+  "scopedRegistries": [
+    {
+      "name": "GameFrameX",
+      "url": "https://gameframex.upm.alianblank.uk",
+      "scopes": [
+        "com.gameframex"
+      ]
+    }
+  ]
+}
+```
+
+`scopes` 控制哪些套件透過此註冊表解析。只有以 `com.gameframex` 開頭的套件才會從這個註冊表取得。
+
+Then add the package to `dependencies`:
+
+```json
+{
+  "dependencies": {
+    "com.gameframex.unity.web.protobuff": "1.1.3"
+  }
+}
+```

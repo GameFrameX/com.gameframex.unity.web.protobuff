@@ -38,15 +38,38 @@ Add the following scripting define symbol in Unity's **Player Settings** -> **Sc
 
 `ENABLE_GAME_FRAME_X_WEB_PROTOBUF_NETWORK`
 
-## Installation (choose one)
+## Installation
 
-1. Add to `manifest.json` dependencies:
-   ```json
-   {"com.gameframex.unity.web.protobuff": "https://github.com/gameframex/com.gameframex.unity.web.protobuff.git"}
-   ```
-2. Add via Unity Package Manager using Git URL:
-   `https://github.com/gameframex/com.gameframex.unity.web.protobuff.git`
-3. Download the repository and place it in your Unity project's `Packages` directory
+### Installation
+
+Edit your Unity project's `Packages/manifest.json` and add the `scopedRegistries` section:
+
+```json
+{
+  "scopedRegistries": [
+    {
+      "name": "GameFrameX",
+      "url": "https://gameframex.upm.alianblank.uk",
+      "scopes": [
+        "com.gameframex"
+      ]
+    }
+  ]
+}
+```
+
+`scopes` controls which packages are resolved through this registry. Only packages whose names start with `com.gameframex` will be fetched from it.
+
+Then add the package to `dependencies`:
+
+```json
+{
+  "dependencies": {
+    "com.gameframex.unity.web.protobuff": "1.1.3"
+  }
+}
+```
+
 
 ## Usage Example
 
