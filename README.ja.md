@@ -25,7 +25,9 @@
 
 GameFrameX の Web ProtoBuff リクエストコンポーネント - Protocol Buffer ベースの HTTP ネットワークリクエスト機能を提供します。
 
-## インストール
+## クイックスタート
+
+### インストール
 
 ### インストール
 
