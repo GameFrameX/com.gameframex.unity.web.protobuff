@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.1.4...1.1.5) (2026-07-29)
+
+
+### Bug Fixes
+
+* 更新 package.json 中的依赖版本 ([7daaefb](https://github.com/gameframex/com.gameframex.unity.web.protobuff/commit/7daaefb80bc964bd523ccb9b0682d93c0df852fb))
+
 ## [1.1.4](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.1.3...1.1.4) (2026-06-07)
 
 
