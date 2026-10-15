@@ -24,7 +24,7 @@
         "com.gameframex.unity.litjson": "1.2.4",
         "com.gameframex.unity.web": "2.0.0",
         "com.gameframex.unity.network": "3.0.0",
-        "com.gameframex.unity.google.protobuf": "3.4.2"
+        "com.gameframex.unity.google.protobuf": "3.5.0"
     },
     "devDependencies": {
         "semantic-release": "^24.2.0",
