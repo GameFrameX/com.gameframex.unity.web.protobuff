@@ -47,6 +47,7 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
     [AddComponentMenu("GameFrameX/Web ProtoBuff")]
     [UnityEngine.Scripting.Preserve]
     [RequireComponent(typeof(GameFrameXWebProtoBuffCroppingHelper))]
+    [GameFrameXAutoComponent(1500)]
     public sealed class WebProtoBuffComponent : GameFrameworkComponent
     {
         /// <summary>
@@ -64,6 +65,7 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
         /// 获取或设置下载超时时长，以秒为单位。
         /// 当请求超过此时间未完成时会自动终止。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public float Timeout
         {
             get { return m_WebProtoBuffManager.Timeout; }
@@ -102,6 +104,7 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
         /// 此方法专门用于处理Protocol Buffer格式的请求和响应。
         /// 发送的消息和接收的响应都必须是Protocol Buffer消息类型。
         /// </remarks>
+        [UnityEngine.Scripting.Preserve]
         public Task<T> Post<T>(string url, GameFrameX.Network.Runtime.MessageObject message) where T : GameFrameX.Network.Runtime.MessageObject, GameFrameX.Network.Runtime.IResponseMessage
         {
             return m_WebProtoBuffManager.Post<T>(url, message);

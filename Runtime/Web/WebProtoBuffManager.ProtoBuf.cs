@@ -179,6 +179,7 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
         /// <remarks>
         /// 此方法用于向指定的URL发送POST请求，并接收响应。请求的消息体由参数message提供，而响应则会被解析为指定的泛型类型T。
         /// </remarks>
+        [UnityEngine.Scripting.Preserve]
         public async Task<T> Post<T>(string url, MessageObject message) where T : MessageObject, IResponseMessage
         {
             DebugSendLog(message);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using GameFrameX.Runtime;
@@ -12,7 +12,7 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
     /// Web请求管理器,实现HTTP GET和POST请求功能
     /// </summary>
     [UnityEngine.Scripting.Preserve]
-    public partial class WebProtoBuffManager : GameFrameworkModule, IWebProtoBuffManager
+    public partial class WebProtoBuffManager : IGameFrameworkModule, IWebProtoBuffManager, IUpdatableModule, IShutdownableModule
     {
         // 用于构建URL的StringBuilder
         private readonly StringBuilder m_StringBuilder = new StringBuilder(256);
@@ -33,6 +33,7 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
         /// <summary>
         /// 获取或设置超时时间(秒)
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public float Timeout
         {
             get { return m_Timeout; }
@@ -46,17 +47,20 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
         /// <summary>
         /// 获取或设置每个服务器的最大连接数
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public int MaxConnectionPerServer { get; set; }
 
         /// <summary>
         /// 获取或设置请求超时时间
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public TimeSpan RequestTimeout { get; set; }
 
         /// <summary>
         /// 更新处理请求队列
         /// </summary>
-        protected override void Update(float elapseSeconds, float realElapseSeconds)
+        [UnityEngine.Scripting.Preserve]
+        public void Update(float elapseSeconds, float realElapseSeconds)
         {
             lock (m_StringBuilder)
             {
@@ -67,7 +71,8 @@ namespace GameFrameX.Web.ProtoBuff.Runtime
         /// <summary>
         /// 关闭时清理资源
         /// </summary>
-        protected override void Shutdown()
+        [UnityEngine.Scripting.Preserve]
+        public void Shutdown()
         {
             ShutdownProtoBuf();
         }
