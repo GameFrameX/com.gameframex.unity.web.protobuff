@@ -2,7 +2,7 @@
     "name": "com.gameframex.unity.web.protobuff",
     "displayName": "Game Frame X Web ProtoBuff",
     "category": "GameFrameX",
-    "description": "GameFrameX Web ProtoBuf — Unity Protobuf HTTP POST package. Extends the Web layer with binary message support, serializing MessageObject instances and deserializing typed IResponseMessage responses via conditional compilation. Docs: https://gameframex.doc.alianblank.com\n\nGameFrameX Web ProtoBuf — Unity Protobuf HTTP POST 功能包。扩展 Web 层以支持二进制消息，序列化 MessageObject 实例并通过条件编译反序列化类型化的 IResponseMessage 响应。文档：https://gameframex.doc.alianblank.com",
+    "description": "GameFrameX Web ProtoBuf — Protobuf HTTP extension for GameFrameX Web. Adds binary message POST support, serializing MessageObject requests and deserializing typed IResponseMessage responses via conditional compilation. Docs: https://gameframex.doc.alianblank.com\n\nGameFrameX Web ProtoBuf — GameFrameX Web 的 Protobuf HTTP 扩展功能包。新增二进制消息 POST 支持，序列化 MessageObject 请求，并通过条件编译反序列化类型化的 IResponseMessage 响应。文档：https://gameframex.doc.alianblank.com",
     "version": "2.0.0",
     "unity": "2019.4",
     "keywords": [
