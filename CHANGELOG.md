@@ -1,3 +1,18 @@
+# [2.0.0](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.1.5...2.0.0) (2026-10-15)
+
+
+### Features
+
+* **web.protobuff:** 承接 MessageHttpObject 与 protobuf 契约注册 ([81ae4a1](https://github.com/gameframex/com.gameframex.unity.web.protobuff/commit/81ae4a10a19efd88035e2f1878833c33201cb032))
+* **web.protobuff:** 模块契约全接口化迁移 ([08050b8](https://github.com/gameframex/com.gameframex.unity.web.protobuff/commit/08050b862fa4f445e75faac53a8b7faf9210a566))
+
+
+### BREAKING CHANGES
+
+* **web.protobuff:** 模块契约全接口化，删除 GameFrameworkModule
+抽象基类依赖；业务侧仍通过 GetModule<IWebProtoBuffManager>()
+访问模块，不受影响。
+
 # [2.0.0](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.1.5...2.0.0) (2026-10-08)
 
 
