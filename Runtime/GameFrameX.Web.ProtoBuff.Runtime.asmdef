@@ -3,6 +3,7 @@
   "rootNamespace": "GameFrameX.Web.ProtoBuff.Runtime",
   "references": [
     "GameFrameX.Runtime",
+    "GameFrameX.LitJSON.Runtime",
     "GameFrameX.Web.Runtime",
     "GameFrameX.Network.Runtime",
     "ProtoBuffer.Runtime"
