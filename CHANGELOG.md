@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/2.0.0...2.0.1) (2026-11-10)
+
+
+### Bug Fixes
+
+* **web.protobuff:** 添加完整 link.xml 防代码裁剪保护 ([fec629d](https://github.com/gameframex/com.gameframex.unity.web.protobuff/commit/fec629d5de8278d49f791d859ac758c1c2a0daa8))
+
 # [2.0.0](https://github.com/gameframex/com.gameframex.unity.web.protobuff/compare/1.1.5...2.0.0) (2026-10-15)
 
 
